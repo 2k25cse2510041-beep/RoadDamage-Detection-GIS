@@ -1,0 +1,42 @@
+[
+  {
+    "road_id": "R101",
+    "latitude": 28.614,
+    "longitude": 77.20920000000001,
+    "damage_type": "Pothole",
+    "severity": "HIGH",
+    "confidence": 0.94
+  },
+  {
+    "road_id": "R101",
+    "latitude": 28.6141,
+    "longitude": 77.2093,
+    "damage_type": "Crack",
+    "severity": "MEDIUM",
+    "confidence": 0.91
+  },
+  {
+    "road_id": "R101",
+    "latitude": 28.614050000000002,
+    "longitude": 77.20925,
+    "damage_type": "Pothole",
+    "severity": "CRITICAL",
+    "confidence": 0.96
+  },
+  {
+    "road_id": "R102",
+    "latitude": 28.6219,
+    "longitude": 77.218,
+    "damage_type": "Edge damage",
+    "severity": "LOW",
+    "confidence": 0.88
+  },
+  {
+    "road_id": "R102",
+    "latitude": 28.6221,
+    "longitude": 77.2181,
+    "damage_type": "Rutting",
+    "severity": "MEDIUM",
+    "confidence": 0.9
+  }
+]
