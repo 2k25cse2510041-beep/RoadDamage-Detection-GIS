@@ -8,7 +8,7 @@ class ActiveLearningPipeline:
     """
     Human-in-the-Loop AI, Active Learning & Model Lifecycle Engine.
     Handles:
-    - Uncertainty Sampling: Isolates detections with confidence in boundary range (e.g. 0.45-0.65).
+    - Uncertainty Sampling: Isolates detections with confidence in boundary range (0.45-0.65).
     - Human Correction Queueing.
     - Continuous Model Versioning & Automated Retraining trigger.
     """
@@ -52,7 +52,6 @@ class ActiveLearningPipeline:
         with open(feedback_file, "a") as f:
             f.write(json.dumps(record) + "\n")
 
-        # Check total corrections count for automated retraining trigger
         total_samples = self._count_queued_samples()
         retrain_triggered = False
         if total_samples >= 100:

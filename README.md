@@ -72,94 +72,16 @@ flowchart TD
 
 ---
 
-## 📁 Repository Structure
-
-```
-roadvision-ai-ml/
-│
-├── api/                       # FastAPI REST API endpoints
-│   └── app.py
-├── config/                    # Settings & calibration parameters
-│   └── settings.py
-├── data/                      # Synthetic data generator & sample GIS dataset
-│   └── synthetic_generator.py
-├── models/                    # All 14 ML & CV Engine Core Modules
-│   ├── detection.py           # Object Detector
-│   ├── segmentation.py        # Surface & Mask Segmentation
-│   ├── classification.py      # Damage Classifier
-│   ├── measurement.py         # CV Measurement & Crack Skeletonization
-│   ├── severity.py            # XGBoost Severity Predictor
-│   ├── health_score.py        # 0-100 Road Health Score
-│   ├── tracking.py            # Video ByteTrack / DeepSORT
-│   ├── spatial_gis.py         # Spatial DBSCAN & GeoJSON
-│   ├── infrastructure.py     # Traffic, Assets & Waterlogging
-│   ├── predictive.py          # Weather & Risk Forecasting
-│   ├── explainability.py      # XAI & Grad-CAM
-│   ├── active_learning.py     # Uncertainty Sampling & Retraining
-│   ├── spatio_temporal.py    # GNN & Road Digital Twin
-│   └── report_generator.py    # Multimodal Inspection Reporting
-├── pipeline/                  # Unified End-to-End Orchestrator
-│   └── inference_pipeline.py
-├── tests/                     # Automated Pytest Suite
-│   └── test_pipeline.py
-├── demo_run.py                # Instant end-to-end demo runner
-├── requirements.txt           # Dependency requirements
-└── README.md                  # Project documentation
-```
-
----
-
 ## ⚡ Quick Start & Installation
 
-### 1. Clone & Setup Environment
 ```bash
-git clone https://github.com/your-username/roadvision-ai-ml.git
-cd roadvision-ai-ml
-python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On Linux/Mac:
-source venv/bin/activate
-
+git clone https://github.com/2k25cse2510041-beep/RoadDamage-Detection-GIS.git
+cd RoadDamage-Detection-GIS
 pip install -r requirements.txt
-```
 
-### 2. Run Instant End-to-End Demo
-To verify the entire ML pipeline (generates synthetic image, detects damages, computes metrics, severity, health index, predictive risk, GeoJSON clusters, and saves annotated output):
-```bash
+# Run Instant End-to-End Demo
 python demo_run.py
-```
 
-### 3. Launch FastAPI Web Server
-For Frontend (React/Vue/Next.js) & Backend integration:
-```bash
+# Launch FastAPI Web Server
 uvicorn api.app:app --reload --port 8000
 ```
-Open browser at `http://localhost:8000/docs` to view interactive Swagger REST API documentation.
-
----
-
-## 🔌 API Endpoints Reference
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/` | Health check & model version |
-| `POST` | `/api/v1/predict-image` | Full ML pipeline on image file upload |
-| `POST` | `/api/v1/predict-video-frame` | Sequential video frame processing with tracking |
-| `POST` | `/api/v1/spatial-clustering` | DBSCAN GIS coordinate clustering & GeoJSON map output |
-| `GET` | `/api/v1/digital-twin/{road_id}` | Fetch AI Digital Twin profile for road segment |
-| `POST` | `/api/v1/active-learning/feedback` | Ingest human feedback corrections |
-| `GET` | `/api/v1/model-metrics` | Retrieve model mAP, precision, recall stats |
-
----
-
-## 🧪 Running Unit Tests
-
-```bash
-pytest tests/
-```
-
----
-
-## 📜 License
-This project is released under the MIT License.

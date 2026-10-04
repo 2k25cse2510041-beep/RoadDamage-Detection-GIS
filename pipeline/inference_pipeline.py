@@ -18,7 +18,7 @@ from models.report_generator import ReportGenerator
 
 class RoadVisionPipeline:
     """
-    Unified Master ML Pipeline orchestrating all 28+ ML capabilities for RoadVision AI.
+    Master ML Pipeline orchestrating all 28+ ML capabilities for RoadVision AI.
     """
     def __init__(self):
         self.detector = DamageDetector()
@@ -66,22 +66,17 @@ class RoadVisionPipeline:
             bbox = d["bbox"]
             initial_type = d["damage_type"]
             
-            # Crop region
             x1, y1, x2, y2 = bbox
             crop = image[max(0, y1):min(h, y2), max(0, x1):min(w, x2)]
             
-            # Classifier Verification
             cls_info = self.classifier.classify_crop(crop, initial_label=initial_type)
             final_type = cls_info["predicted_class"]
 
-            # Damage Mask Segmentation
             dmg_mask, dmg_area_m2 = self.segmentor.segment_damage(image, bbox)
             total_damaged_area += dmg_area_m2
 
-            # Computer Vision Measurement & Crack Analysis
             metrics = self.measurer.measure(dmg_mask, final_type, bbox)
 
-            # Severity Prediction
             severity_info = self.severity_predictor.predict(
                 damage_type=final_type,
                 area_m2=metrics["area_m2"],
@@ -90,7 +85,6 @@ class RoadVisionPipeline:
                 historical_trend=historical_trend
             )
 
-            # XAI Explanation Attribution
             explanation = self.explainability_engine.explain_severity(
                 severity_info,
                 {"area_m2": metrics["area_m2"], "crack_density_pct": metrics.get("crack_density_pct", 0.0), "damage_count": len(raw_detections)}

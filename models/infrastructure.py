@@ -50,7 +50,6 @@ class InfrastructureDetector:
 
     def _detect_traffic(self, image: np.ndarray) -> Dict[str, Any]:
         """Detect vehicle counts and compute traffic density."""
-        # Simulated heuristic object detector for vehicles
         vehicle_counts = {"car": 12, "bike": 8, "bus": 2, "truck": 3}
         total_vehicles = sum(vehicle_counts.values())
         
@@ -78,7 +77,6 @@ class InfrastructureDetector:
 
     def _detect_obstructions(self, image: np.ndarray) -> List[Dict[str, Any]]:
         """Detect hazardous road blockages or debris."""
-        # Visual specular reflection & shadow variance check
         return [
             {
                 "hazard_type": "Construction debris",
@@ -91,7 +89,6 @@ class InfrastructureDetector:
     def _analyze_lane_markings(self, image: np.ndarray) -> Dict[str, Any]:
         """Segment and grade state of painted lane markings."""
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        # Threshold bright white/yellow lane pixels
         _, white_mask = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
         pixel_count = np.sum(white_mask > 0)
         
@@ -113,12 +110,10 @@ class InfrastructureDetector:
 
     def _detect_waterlogging(self, image: np.ndarray) -> Dict[str, Any]:
         """Identify surface standing water, rain reflectivity, or flooding."""
-        # Convert to HSV to detect high saturation water reflections
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         sat = hsv[:, :, 1]
         val = hsv[:, :, 2]
         
-        # Standing water typically shows smooth texture and high value, low saturation mirror reflectivity
         reflective_mask = (val > 180) & (sat < 40)
         water_ratio = float(np.sum(reflective_mask) / (image.shape[0] * image.shape[1]))
 

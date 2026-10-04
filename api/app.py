@@ -1,10 +1,9 @@
-import os
 import cv2
 import numpy as np
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
+from typing import List, Dict, Any
 
 from pipeline.inference_pipeline import RoadVisionPipeline
 from models.spatial_gis import SpatialClusterer

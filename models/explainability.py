@@ -25,7 +25,6 @@ class ModelExplainability:
         count = feature_dict.get("damage_count", 1)
         traffic = feature_dict.get("traffic", 2500)
 
-        # Compute relative feature contributions (%)
         total_weight = (area * 3.0) + (density * 0.5) + (count * 4.0) + (traffic / 1000.0) + 1.0
         
         attributions = {
@@ -35,7 +34,6 @@ class ModelExplainability:
             "Traffic Exposure Volume": round(((traffic / 1000.0) / total_weight) * 100, 1)
         }
 
-        # Human natural language rationale
         top_factor = max(attributions, key=attributions.get)
         explanation_text = (
             f"The severity rating was primarily driven by '{top_factor}' "
@@ -62,7 +60,6 @@ class ModelExplainability:
 
         if bbox:
             x1, y1, x2, y2 = bbox
-            # Gaussian center focus over bounding box
             cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
             sigma = max(abs(x2 - x1), abs(y2 - y1)) / 2.0
             
@@ -72,10 +69,7 @@ class ModelExplainability:
         else:
             heatmap[:, :] = 0.5
 
-        # Normalize and apply JET color map
         heatmap_norm = np.uint8(255 * heatmap)
         heatmap_colored = cv2.applyColorMap(heatmap_norm, cv2.COLORMAP_JET)
-        
-        # Overlay on original image
         cam_overlay = cv2.addWeighted(image, 0.6, heatmap_colored, 0.4, 0)
         return cam_overlay

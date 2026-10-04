@@ -44,7 +44,6 @@ def run_demo():
         sev = d["severity"]
         conf = d["confidence"]
         
-        # Color coding by severity (BGR format)
         color_map = {"LOW": (0, 255, 0), "MEDIUM": (0, 255, 255), "HIGH": (0, 165, 255), "CRITICAL": (0, 0, 255)}
         color = color_map.get(sev, (0, 0, 255))
         
